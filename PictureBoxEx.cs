@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -35,8 +35,8 @@ namespace PanelPictureBoxSet
         {
             InitializeComponent();
 
-            this.trackBar1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MouseWheelEvent);
-            this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MouseWheelEvent);
+            this.trackBar_ExpaningFactor.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MouseWheelEvent);
+            this.pictureBox_View.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MouseWheelEvent);
             imageFocusPoint = new Point(0, 0);
             panelFocusPoint = new Point(0, 0);
 
@@ -55,26 +55,26 @@ namespace PanelPictureBoxSet
         private void ControlLayout(int ctrWidth, int ctrHeight)
         {
             //PictureBoxEx_Panel
-            this.PictureBoxEx_Panel.Width
+            this.panel_PictureBox.Width
                 = ctrWidth - m
-                - this.vScrollBar1.Width - m;
+                - this.vScrollBar_Panel.Width - m;
 
-            this.PictureBoxEx_Panel.Height
+            this.panel_PictureBox.Height
                 = ctrHeight - m
-                - this.trackBar1.Height - m
-                - this.hScrollBar1.Height - m;
+                - this.trackBar_ExpaningFactor.Height - m
+                - this.hScrollBar_Panel.Height - m;
 
             //hScrollBar
-            this.hScrollBar1.Width = this.PictureBoxEx_Panel.Width;
-            this.hScrollBar1.Left = 0;
-            this.hScrollBar1.Top = this.PictureBoxEx_Panel.Height + m;
-            this.hScrollBar1.Enabled = false;
+            this.hScrollBar_Panel.Width = this.panel_PictureBox.Width;
+            this.hScrollBar_Panel.Left = 0;
+            this.hScrollBar_Panel.Top = this.panel_PictureBox.Height + m;
+            this.hScrollBar_Panel.Enabled = false;
 
             //vScrollBar
-            this.vScrollBar1.Height = this.PictureBoxEx_Panel.Height;
-            this.vScrollBar1.Left = this.PictureBoxEx_Panel.Width + m;
-            this.vScrollBar1.Top = 0;
-            this.vScrollBar1.Enabled = false;
+            this.vScrollBar_Panel.Height = this.panel_PictureBox.Height;
+            this.vScrollBar_Panel.Left = this.panel_PictureBox.Width + m;
+            this.vScrollBar_Panel.Top = 0;
+            this.vScrollBar_Panel.Enabled = false;
 
             //button_LoadFile
             this.button_LoadFile.Left = ctrWidth - m - this.button_LoadFile.Width;
@@ -87,13 +87,13 @@ namespace PanelPictureBoxSet
             this.button_Reset.Top = ctrHeight - m - button_Reset.Height;
 
             //TrackBar
-            this.trackBar1.Width = this.PictureBoxEx_Panel.Width;
-            this.trackBar1.Left = 0;
-            this.trackBar1.Top = this.PictureBoxEx_Panel.Height + m + hScrollBar1.Height;
+            this.trackBar_ExpaningFactor.Width = this.panel_PictureBox.Width;
+            this.trackBar_ExpaningFactor.Left = 0;
+            this.trackBar_ExpaningFactor.Top = this.panel_PictureBox.Height + m + hScrollBar_Panel.Height;
 
             //NumericUpDown
-            this.numericUpDown1.Left = ctrWidth - m - this.button_Reset.Width - m * 2 - this.numericUpDown1.Width;
-            this.numericUpDown1.Top = ctrHeight - m - this.numericUpDown1.Height;
+            this.numericUpDown_ExpaningFactor.Left = ctrWidth - m - this.button_Reset.Width - m * 2 - this.numericUpDown_ExpaningFactor.Width;
+            this.numericUpDown_ExpaningFactor.Top = ctrHeight - m - this.numericUpDown_ExpaningFactor.Height;
 
             //Label
             this.label_MouseInfo.Left = 0;
@@ -104,15 +104,15 @@ namespace PanelPictureBoxSet
         private void expandPictureBox(Point imageFocusPoint, Point panelFocusPoint)
         {
 
-            if (this.pictureBox1.Image != null)
+            if (this.pictureBox_View.Image != null)
             {
-                int Factor = this.trackBar1.Value;
+                int Factor = this.trackBar_ExpaningFactor.Value;
 
-                this.pictureBox1.Width = (this.pictureBox1.Image.Width * Factor) / 100;
-                this.pictureBox1.Height = (this.pictureBox1.Image.Height * Factor) / 100;
+                this.pictureBox_View.Width = (this.pictureBox_View.Image.Width * Factor) / 100;
+                this.pictureBox_View.Height = (this.pictureBox_View.Image.Height * Factor) / 100;
 
-                this.pictureBox1.Left = -(imageFocusPoint.X * Factor) / 100 + panelFocusPoint.X;
-                this.pictureBox1.Top = -(imageFocusPoint.Y * Factor) / 100 + panelFocusPoint.Y;
+                this.pictureBox_View.Left = -(imageFocusPoint.X * Factor) / 100 + panelFocusPoint.X;
+                this.pictureBox_View.Top = -(imageFocusPoint.Y * Factor) / 100 + panelFocusPoint.Y;
 
             }
 
@@ -123,18 +123,18 @@ namespace PanelPictureBoxSet
 
         private void updateScrollBarParam()
         {
-            if (this.pictureBox1.Image.Width > this.PictureBoxEx_Panel.Width)
+            if (this.pictureBox_View.Image.Width > this.panel_PictureBox.Width)
             {
-                this.hScrollBar1.Enabled = true;
-                this.hScrollBar1.Maximum = this.pictureBox1.Image.Width;
-                this.hScrollBar1.LargeChange = this.PictureBoxEx_Panel.Width;
+                this.hScrollBar_Panel.Enabled = true;
+                this.hScrollBar_Panel.Maximum = this.pictureBox_View.Image.Width;
+                this.hScrollBar_Panel.LargeChange = this.panel_PictureBox.Width;
             }
 
-            if (this.pictureBox1.Image.Height > this.PictureBoxEx_Panel.Height)
+            if (this.pictureBox_View.Image.Height > this.panel_PictureBox.Height)
             {
-                this.vScrollBar1.Enabled = true;
-                this.vScrollBar1.Maximum = this.pictureBox1.Image.Height;
-                this.vScrollBar1.LargeChange = this.PictureBoxEx_Panel.Height;
+                this.vScrollBar_Panel.Enabled = true;
+                this.vScrollBar_Panel.Maximum = this.pictureBox_View.Image.Height;
+                this.vScrollBar_Panel.LargeChange = this.panel_PictureBox.Height;
             }
 
         }
@@ -143,8 +143,8 @@ namespace PanelPictureBoxSet
         {
             try
             {
-                this.hScrollBar1.Value = -pictureBox1.Location.X;
-                this.vScrollBar1.Value = -pictureBox1.Location.Y;
+                this.hScrollBar_Panel.Value = -pictureBox_View.Location.X;
+                this.vScrollBar_Panel.Value = -pictureBox_View.Location.Y;
             }
             catch { return false; }
 
@@ -158,8 +158,8 @@ namespace PanelPictureBoxSet
 
             Bitmap bitmap = new Bitmap(imageFilePath);
             p.Image = bitmap;
-            p.Width = (bitmap.Width * this.trackBar1.Value) /100;
-            p.Height = (bitmap.Height * this.trackBar1.Value) / 100;
+            p.Width = (bitmap.Width * this.trackBar_ExpaningFactor.Value) /100;
+            p.Height = (bitmap.Height * this.trackBar_ExpaningFactor.Value) / 100;
 
         }
 
@@ -168,18 +168,18 @@ namespace PanelPictureBoxSet
 
         private void MouseWheelEvent(object sender, MouseEventArgs e)
         {
-            if (sender == trackBar1) {
+            if (sender == trackBar_ExpaningFactor) {
                 setPanelFocusPointOnCenter();
                 setImageFocusPointFromViewCenter();
             }
 
             if (e.Delta > 0)
             {
-                this.trackBar1.Value = this.trackBar1.Value < this.trackBar1.Maximum- viewScaleStep_MouseWheel ? this.trackBar1.Value + viewScaleStep_MouseWheel : this.trackBar1.Maximum;
+                this.trackBar_ExpaningFactor.Value = this.trackBar_ExpaningFactor.Value < this.trackBar_ExpaningFactor.Maximum- viewScaleStep_MouseWheel ? this.trackBar_ExpaningFactor.Value + viewScaleStep_MouseWheel : this.trackBar_ExpaningFactor.Maximum;
             }
             else
             {
-                this.trackBar1.Value = this.trackBar1.Value > this.trackBar1.Minimum+ viewScaleStep_MouseWheel ? this.trackBar1.Value - viewScaleStep_MouseWheel : this.trackBar1.Minimum;
+                this.trackBar_ExpaningFactor.Value = this.trackBar_ExpaningFactor.Value > this.trackBar_ExpaningFactor.Minimum+ viewScaleStep_MouseWheel ? this.trackBar_ExpaningFactor.Value - viewScaleStep_MouseWheel : this.trackBar_ExpaningFactor.Minimum;
             }
 
         }
@@ -192,7 +192,7 @@ namespace PanelPictureBoxSet
         /// <param name="Y">pictureBox coordinate</param>
         private void setImageFocusPoint(int X, int Y)
         {
-            int Factor = this.trackBar1.Value;
+            int Factor = this.trackBar_ExpaningFactor.Value;
 
             imageFocusPoint.X = (X * 100) / Factor;
             imageFocusPoint.Y = (Y * 100) / Factor;
@@ -202,11 +202,11 @@ namespace PanelPictureBoxSet
 
         private void setImageFocusPointFromViewCenter()
         {
-            if (this.pictureBox1.Image != null)
+            if (this.pictureBox_View.Image != null)
             {
-                int Factor = this.trackBar1.Value;
-                imageFocusPoint.X = ((-this.pictureBox1.Left + this.PictureBoxEx_Panel.Width / 2) * 100) / Factor;
-                imageFocusPoint.Y = ((-this.pictureBox1.Top + this.PictureBoxEx_Panel.Height / 2) * 100) / Factor;
+                int Factor = this.trackBar_ExpaningFactor.Value;
+                imageFocusPoint.X = ((-this.pictureBox_View.Left + this.panel_PictureBox.Width / 2) * 100) / Factor;
+                imageFocusPoint.Y = ((-this.pictureBox_View.Top + this.panel_PictureBox.Height / 2) * 100) / Factor;
             }
 
             getMouseReport();
@@ -215,20 +215,20 @@ namespace PanelPictureBoxSet
 
         private void setImageFocusPointFromImageCenter()
         {
-            if (this.pictureBox1.Image != null)
+            if (this.pictureBox_View.Image != null)
             {
-                imageFocusPoint.X = this.pictureBox1.Image.Width / 2;
-                imageFocusPoint.Y = this.pictureBox1.Image.Height / 2;
+                imageFocusPoint.X = this.pictureBox_View.Image.Width / 2;
+                imageFocusPoint.Y = this.pictureBox_View.Image.Height / 2;
             }
             getMouseReport();
         }
 
         private void setPanelFocusPointFromImagePoint(int X, int Y)
         {
-            if (this.pictureBox1.Image != null)
+            if (this.pictureBox_View.Image != null)
             {
-                panelFocusPoint.X = X + this.pictureBox1.Location.X;
-                panelFocusPoint.Y = Y + this.pictureBox1.Location.Y;
+                panelFocusPoint.X = X + this.pictureBox_View.Location.X;
+                panelFocusPoint.Y = Y + this.pictureBox_View.Location.Y;
             }
 
             getMouseReport();
@@ -237,8 +237,8 @@ namespace PanelPictureBoxSet
 
         private void setPanelFocusPointOnCenter()
         {
-            panelFocusPoint.X = this.PictureBoxEx_Panel.Width / 2;
-            panelFocusPoint.Y = this.PictureBoxEx_Panel.Height / 2;
+            panelFocusPoint.X = this.panel_PictureBox.Width / 2;
+            panelFocusPoint.Y = this.panel_PictureBox.Height / 2;
             getMouseReport();
         }
 
@@ -266,9 +266,9 @@ namespace PanelPictureBoxSet
 
             if (ofd.ShowDialog() != DialogResult.OK) return;
 
-            setPictureBox(this.pictureBox1, ofd.FileName);
-            this.pictureBox1.Top = 0;
-            this.pictureBox1.Left = 0;
+            setPictureBox(this.pictureBox_View, ofd.FileName);
+            this.pictureBox_View.Top = 0;
+            this.pictureBox_View.Left = 0;
 
             updateScrollBarParam();
             updateScrollBarPosition();
@@ -282,9 +282,9 @@ namespace PanelPictureBoxSet
 
         private void button_Reset_Click(object sender, EventArgs e)
         {
-            this.trackBar1.Value = 100;
-            this.pictureBox1.Top = 0;
-            this.pictureBox1.Left = 0;
+            this.trackBar_ExpaningFactor.Value = 100;
+            this.pictureBox_View.Top = 0;
+            this.pictureBox_View.Left = 0;
 
             setImageFocusPointFromImageCenter();
             setPanelFocusPointOnCenter();
@@ -296,7 +296,7 @@ namespace PanelPictureBoxSet
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            this.numericUpDown1.Value = ((TrackBar)sender).Value;
+            this.numericUpDown_ExpaningFactor.Value = ((TrackBar)sender).Value;
 
             expandPictureBox(imageFocusPoint, panelFocusPoint);
             updateScrollBarParam();
@@ -306,7 +306,7 @@ namespace PanelPictureBoxSet
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            this.trackBar1.Value = (int)((NumericUpDown)sender).Value;
+            this.trackBar_ExpaningFactor.Value = (int)((NumericUpDown)sender).Value;
         }
 
 
@@ -356,17 +356,17 @@ namespace PanelPictureBoxSet
 
             if (MouseMiddleDown)
             {
-                Point pb = this.pictureBox1.Location;
+                Point pb = this.pictureBox_View.Location;
                 int newLeft = pb.X + MouseLocation_Now.X - MouseLocation_MouseDown.X;
                 int newTop = pb.Y + MouseLocation_Now.Y - MouseLocation_MouseDown.Y;
 
                 //if (-newTop >= vScrollBar1.Minimum && -newTop <= vScrollBar1.Maximum - this.PictureBoxEx_Panel.Height)
                 {
-                    this.pictureBox1.Top = newTop;
+                    this.pictureBox_View.Top = newTop;
                 }
                 //if (-newLeft >= hScrollBar1.Minimum && -newLeft <= hScrollBar1.Maximum - this.PictureBoxEx_Panel.Width)
                 {
-                    this.pictureBox1.Left = newLeft;
+                    this.pictureBox_View.Left = newLeft;
                 }
 
                 updateScrollBarPosition();
@@ -379,18 +379,18 @@ namespace PanelPictureBoxSet
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            this.pictureBox1.Top = -this.vScrollBar1.Value;
+            this.pictureBox_View.Top = -this.vScrollBar_Panel.Value;
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            this.pictureBox1.Left = -this.hScrollBar1.Value;
+            this.pictureBox_View.Left = -this.hScrollBar_Panel.Value;
         }
 
         private void button_Center_Click(object sender, EventArgs e)
         {
-            this.pictureBox1.Left = - this.pictureBox1.Width / 2 + this.PictureBoxEx_Panel.Width/2;
-            this.pictureBox1.Top = -this.pictureBox1.Height/2 + this.PictureBoxEx_Panel.Height / 2;
+            this.pictureBox_View.Left = - this.pictureBox_View.Width / 2 + this.panel_PictureBox.Width/2;
+            this.pictureBox_View.Top = -this.pictureBox_View.Height/2 + this.panel_PictureBox.Height / 2;
 
             updateScrollBarPosition();
 
